@@ -93,6 +93,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7222462359338800248}
   - component: {fileID: 6604171679159735156}
+  - component: {fileID: 2847835088900483086}
   m_Layer: 0
   m_Name: WPN_USSR_Shovel_MPL50
   m_TagString: Interactable
@@ -137,3 +138,18 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.16832484, y: 0.47896913, z: 0.046295166}
   m_Center: {x: 0.008295767, y: 0.12854801, z: 0.0029449463}
+--- !u!114 &2847835088900483086
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8030067203157298882}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b50c44fcd166ba54685bb7e30fef60ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionText: Press E To Pickup
+  itemName: Shovel
+  iconImage: {fileID: 0}

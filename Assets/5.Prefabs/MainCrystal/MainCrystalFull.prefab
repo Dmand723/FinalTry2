@@ -9,6 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3871380136899211124}
+  - component: {fileID: -1241577024713124566}
+  - component: {fileID: -7935016793051622948}
+  - component: {fileID: 602525592444991055}
   m_Layer: 0
   m_Name: MainCrystalFull
   m_TagString: Untagged
@@ -34,6 +37,55 @@ Transform:
   - {fileID: 2288863841160503046}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &-1241577024713124566
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7036969962300905890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dddfff74aa1819f47ba2c77d8ceff8b6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  shard1: {fileID: 8890997963796700264}
+  shard2: {fileID: 1785115855350205639}
+  shard3: {fileID: 1479570078766450108}
+--- !u!114 &-7935016793051622948
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7036969962300905890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b50c44fcd166ba54685bb7e30fef60ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactionText: Press E To Pickup
+  itemName: HomeCrystal
+  iconImage: {fileID: 0}
+--- !u!114 &602525592444991055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7036969962300905890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfae93fffaa0d5949b49501e13c138ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowingPrefab: {fileID: 2899515819003516669, guid: 98abb4c476d32494090fcd4068013cb2,
+    type: 3}
+  portalPrefab: {fileID: 5919048439077998079, guid: 82cdfabc2c4bee64497e2ebec301ab0c,
+    type: 3}
+  normalCrystalPrefab: {fileID: 7036969962300905890}
+  interactionText: Press E To Grab Crystal
+  activePedistool: {fileID: 0}
 --- !u!1001 &190733017197070150
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -98,10 +150,17 @@ PrefabInstance:
       value: -50.065
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 7708643756752406524, guid: 35f64bb118df5414b9ab4ff832e73cc5, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35f64bb118df5414b9ab4ff832e73cc5, type: 3}
+--- !u!1 &1479570078766450108 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1598183645801317114, guid: 35f64bb118df5414b9ab4ff832e73cc5,
+    type: 3}
+  m_PrefabInstance: {fileID: 190733017197070150}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2288863841160503046 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2118436897849333824, guid: 35f64bb118df5414b9ab4ff832e73cc5,
@@ -172,13 +231,20 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 2349889562337310982, guid: bca54b09e7564e84e90196218b564f55, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bca54b09e7564e84e90196218b564f55, type: 3}
 --- !u!4 &8081985672889665234 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9143413348680175813, guid: bca54b09e7564e84e90196218b564f55,
+    type: 3}
+  m_PrefabInstance: {fileID: 1065970858382005783}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8890997963796700264 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8478093728170756735, guid: bca54b09e7564e84e90196218b564f55,
     type: 3}
   m_PrefabInstance: {fileID: 1065970858382005783}
   m_PrefabAsset: {fileID: 0}
@@ -246,13 +312,20 @@ PrefabInstance:
       value: Shard2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 9013162745083477084, guid: d8fcf6b05a2f6794ab8d3b45f2eeeb0a, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d8fcf6b05a2f6794ab8d3b45f2eeeb0a, type: 3}
 --- !u!4 &1409012902536500861 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5869491907921408336, guid: d8fcf6b05a2f6794ab8d3b45f2eeeb0a,
+    type: 3}
+  m_PrefabInstance: {fileID: 4825974305593370413}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1785115855350205639 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6503003687745432554, guid: d8fcf6b05a2f6794ab8d3b45f2eeeb0a,
     type: 3}
   m_PrefabInstance: {fileID: 4825974305593370413}
   m_PrefabAsset: {fileID: 0}

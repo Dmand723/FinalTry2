@@ -16,6 +16,7 @@ public class CanvasHandler : MonoBehaviour
     [SerializeField] RectTransform[] hotBars;
     [SerializeField] RectTransform seletionOutline;
     [SerializeField] TextMeshProUGUI interactText;
+    [SerializeField] TextMeshProUGUI TimerText;
     public static CanvasHandler Instance { get; private set; }
 
     private void Awake()
@@ -72,7 +73,12 @@ public class CanvasHandler : MonoBehaviour
             switchHotbarOutline(3);
             switchPlayerInvenItem(3);
         }
-        
+        else if (Input.GetKey(KeyCode.Alpha5))
+        {
+            switchHotbarOutline(4);
+            switchPlayerInvenItem(4);
+        }
+
 
     }
 
@@ -127,5 +133,18 @@ public class CanvasHandler : MonoBehaviour
     public void clearHotbarSlotIcon(int itemSlotInt)
     {
         hotBars[itemSlotInt].GetComponent<HotbarSlot>().emptySlot();
+    }
+    public void setTimerText(float min,float sec)
+    {
+        int seccondsTime = Mathf.FloorToInt(sec);
+        if(seccondsTime <= 9)
+        {
+            TimerText.text = $"{min}:0{seccondsTime}";
+        }
+        else
+        {
+            TimerText.text = $"{min}:{seccondsTime}";
+        }
+        
     }
 }

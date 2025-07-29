@@ -13,6 +13,8 @@ public class PlayerController : MonoBehaviour
     [SerializeField] public GameObject inventoryTransform;
     [SerializeField] GameObject[] inventory;
     [SerializeField] GameObject activeInventroyItem;
+    InventoryCrystalManager inventoryCrystalManager;
+    
     private void Awake()
     {
         if (Instance == null)
@@ -25,7 +27,8 @@ public class PlayerController : MonoBehaviour
             Destroy(gameObject);
             return;
         }
-
+        inventoryCrystalManager = GetComponentInChildren<InventoryCrystalManager>();
+        inventoryCrystalManager.deactivateAll();
     }
 
     // Start is called before the first frame update
@@ -37,7 +40,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        
     }
 
     private void OnTriggerEnter(Collider other)
@@ -57,6 +60,10 @@ public class PlayerController : MonoBehaviour
         if (other.CompareTag("IslandPortal"))
         {
             GameManager.Instance.LoadIslandScence();
+        }
+        if (other.CompareTag("HomePortal"))
+        {
+           GameManager.Instance.GameWin();
         }
     }
 
@@ -159,6 +166,10 @@ public class PlayerController : MonoBehaviour
     public GameObject[] getInventory()
     {
         return inventory;
+    }
+    public void activateShard(int shardIndex)
+    {
+        inventoryCrystalManager.activateShard(shardIndex);
     }
 }
 

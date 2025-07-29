@@ -30,7 +30,7 @@ public class FPSController : MonoBehaviour
     private Vector3 curMovement;
     private float verticalRotation = 0.0f;
 
-    private bool canMove = true;    
+    private bool canMove = true;
 
     public static FPSController Instance { get; private set; }
 
@@ -51,7 +51,7 @@ public class FPSController : MonoBehaviour
             return;
         }
 
-        
+
     }
 
     private void Update()
@@ -66,7 +66,7 @@ public class FPSController : MonoBehaviour
     private void HandleRotation()
     {
         float mouseXRotation = inputHandler.LookInput.x * lookSensitivity;
-        transform.Rotate(0 , mouseXRotation,0);
+        transform.Rotate(0, mouseXRotation, 0);
 
         verticalRotation -= inputHandler.LookInput.y * lookSensitivity;
         verticalRotation = Mathf.Clamp(verticalRotation, -maxLookAngle, maxLookAngle);
@@ -76,7 +76,7 @@ public class FPSController : MonoBehaviour
 
     private void HandleMove()
     {
-        float speed = walkSpeed *(inputHandler.SprintValue > 0 ? sprintMultiplier : 1f);
+        float speed = walkSpeed * (inputHandler.SprintValue > 0 ? sprintMultiplier : 1f);
 
         Vector3 inputDir = new Vector3(inputHandler.MoveInput.x, 0f, inputHandler.MoveInput.y);
         Vector3 worldDir = transform.TransformDirection(inputDir);
@@ -95,8 +95,8 @@ public class FPSController : MonoBehaviour
         if (characterController.isGrounded)
         {
             curMovement.y = -0.5f;
-            
-            if(inputHandler.JumpTriggered)
+
+            if (inputHandler.JumpTriggered)
             {
                 curMovement.y = jumpForce;
             }
@@ -130,11 +130,11 @@ public class FPSController : MonoBehaviour
     {
         if (debug)
         {
-            Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * 3f, Color.red);
+            Debug.DrawRay(mainCamera.transform.position, mainCamera.transform.forward * 4f, Color.red);
         }
         Ray ray = new Ray(mainCamera.transform.position, mainCamera.transform.forward);
         RaycastHit hit;
-        if (Physics.Raycast(ray, out hit, 3f))
+        if (Physics.Raycast(ray, out hit, 4f))
         {
             if (hit.collider.CompareTag("Interactable"))
             {
@@ -145,15 +145,41 @@ public class FPSController : MonoBehaviour
                 GameObject obj = hit.collider.gameObject;
                 if (Input.GetKeyDown(KeyCode.E))
                 {
-                    obj.transform.parent = PlayerController.
-                        Instance.inventoryTransform.transform;
-                    obj.transform.localPosition = Vector3.zero;
-                    obj.tag = "Untagged";
+                    MoveObjectToInventorySpace(obj);
                     PlayerController.Instance.addToInvetory(obj);
                 }
             }
-            else if (hit.collider.CompareTag("DigSpot") && 
-                PlayerController.Instance.returnActiveInventoryItemName() 
+            else if (hit.collider.CompareTag("GlowingInteractable"))
+            {
+                GameObject glowingCrystal = hit.collider.gameObject;
+                string textToShow = glowingCrystal.GetComponent<CrystalHandler>().
+                    interactionText;
+                CanvasHandler.Instance.setInteractText(textToShow);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    // Trigger interaction with the glowing interactable
+                    GameObject obj = GameObject.Instantiate(glowingCrystal.GetComponent<CrystalHandler>()
+                        .normalCrystalPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                    glowingCrystal.GetComponent<CrystalHandler>().activePedistool.removeActiveCrystal();
+                    obj.GetComponent<CrystalHandler>().activePedistool = null;
+                    MoveObjectToInventorySpace(obj);
+                    PlayerController.Instance.addToInvetory(obj);
+                }
+            }
+            else if (hit.collider.CompareTag("ShardInteractable"))
+            {
+                string textToShow = hit.collider.GetComponent<MainShardManager>().interactionText;
+                CanvasHandler.Instance.setInteractText(textToShow);
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    // Trigger interaction with the shard
+                    int shardIndex = hit.collider.GetComponent<MainShardManager>().shardIndex;
+                    PlayerController.Instance.activateShard(shardIndex);
+                    Destroy(hit.collider.gameObject);
+                }
+            }
+            else if (hit.collider.CompareTag("DigSpot") &&
+                PlayerController.Instance.returnActiveInventoryItemName()
                 == "Shovel")
             {
                 string textToShow = hit.collider.GetComponent<DigSpot>().interactionText;
@@ -164,7 +190,7 @@ public class FPSController : MonoBehaviour
                     hit.collider.GetComponent<DigSpot>().Dig();
                 }
             }
-            else if (hit.collider.CompareTag("Pedistool") && 
+            else if (hit.collider.CompareTag("Pedistool") &&
                 PlayerController.Instance.returnActiveInventoryItemName().
                 EndsWith("Crystal"))
             {
@@ -176,6 +202,8 @@ public class FPSController : MonoBehaviour
                     // Place the crystal on the pedestal
                     GameObject activeItem = PlayerController.Instance.
                         getActiveInventoryItem();
+                    Debug.Log(activeItem);
+
                     hit.collider.GetComponent<Pedistool>().setActiveCrystal(
                         activeItem.
                         GetComponent<CrystalHandler>().glowingPrefab, activeItem.
@@ -186,8 +214,41 @@ public class FPSController : MonoBehaviour
                         activeItem));
                     // Remove the crystal from the inventory
                     PlayerController.Instance.removeFromInventory(activeItem);
-                    Destroy(activeItem,0.1f); // Destroy the crystal after placing it   
+                    Destroy(activeItem, 0.1f); // Destroy the crystal after placing it   
                 }
+            }
+            else if (hit.collider.CompareTag("Pedistool") &&
+                PlayerController.Instance.returnActiveInventoryItemName() ==
+                "CrystalToHome")
+            {
+                if (PlayerController.Instance.getActiveInventoryItem().GetComponent<InventoryCrystalManager>().checkIfAllShardsActive())
+                {
+                    // Show interaction prompt
+                    CanvasHandler.Instance.setInteractText("Press E to place the Crystal and open the portl Home");
+                    if (Input.GetKeyDown(KeyCode.E))
+                    {
+                        // Place the portal crystal on the pedestal
+                        GameObject activeItem = PlayerController.Instance.
+                            getActiveInventoryItem();
+                        hit.collider.GetComponent<Pedistool>().setHomeCrystal(
+                            activeItem.
+                            GetComponent<CrystalHandler>().glowingPrefab, activeItem.
+                            GetComponent<CrystalHandler>().portalPrefab);
+                        CanvasHandler.Instance.clearHotbarSlotIcon(
+                            Array.IndexOf(PlayerController.Instance.getInventory(),
+                            activeItem));
+                        // Remove the crystal from the inventory
+                        PlayerController.Instance.removeFromInventory(activeItem);
+                        Destroy(activeItem, 0.1f); // Destroy the crystal after placing it   
+                    }
+                }
+                else
+                {
+                    // Show interaction prompt
+                    CanvasHandler.Instance.setInteractText("You Are Missing Shards");
+                }
+
+
             }
             else
             {
@@ -200,5 +261,14 @@ public class FPSController : MonoBehaviour
             // Hide interaction prompt if nothing is hit
             CanvasHandler.Instance.setInteractText("");
         }
+    }
+
+    private static void MoveObjectToInventorySpace(GameObject obj)
+    {
+        obj.transform.parent = PlayerController.
+            Instance.inventoryTransform.transform;
+        obj.transform.localPosition = Vector3.zero;
+        obj.tag = "Untagged";
+        obj.transform.rotation = Quaternion.identity; // Reset rotation
     }
 }

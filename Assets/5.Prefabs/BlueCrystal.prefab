@@ -138,3 +138,6 @@ MonoBehaviour:
     type: 3}
   portalPrefab: {fileID: 5402818994323317018, guid: 32aca47229ca2374b90f719e70d5d595,
     type: 3}
+  normalCrystalPrefab: {fileID: 1424038230681895282}
+  interactionText: Press E To Grab Crystal
+  activePedistool: {fileID: 0}

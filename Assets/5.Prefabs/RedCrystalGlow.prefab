@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 2106470986625489585}
   - component: {fileID: 2865040135679814485}
   - component: {fileID: 2491657192169049330}
+  - component: {fileID: 328314637046931471}
+  - component: {fileID: 2601043029575629485}
   m_Layer: 0
   m_Name: RedCrystalGlow
   m_TagString: Untagged
@@ -84,6 +86,45 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!135 &328314637046931471
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636486672141116547}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.5049443
+  m_Center: {x: 0, y: 0, z: 0.12994446}
+--- !u!114 &2601043029575629485
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4636486672141116547}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dfae93fffaa0d5949b49501e13c138ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowingPrefab: {fileID: 0}
+  portalPrefab: {fileID: 0}
+  normalCrystalPrefab: {fileID: 7703532438555954646, guid: fd64132f9e290c44088c1a025f4ee4f4,
+    type: 3}
+  interactionText: Press E To Grab Crystal
+  activePedistool: {fileID: 0}
 --- !u!1 &7164725852994601736
 GameObject:
   m_ObjectHideFlags: 0
@@ -110,13 +151,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7164725852994601736}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 0.009, z: 0}
+  m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: -0.012, y: 0.334, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2106470986625489585}
-  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 90, z: 0}
 --- !u!108 &8103579255347882528
 Light:
   m_ObjectHideFlags: 0

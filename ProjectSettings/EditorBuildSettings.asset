@@ -6,15 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/6.Scenes/Title.unity
+    guid: 572ebf529a7a9364781a62c4826d548e
+  - enabled: 1
     path: Assets/6.Scenes/Island.unity
     guid: 8124e5870f4fd4c779e7a5f994e84ad1
   - enabled: 1
-    path: Assets/6.Scenes/Aether.unity
-    guid: ba4fb08e4a5b8d941892445504c505fe
-  - enabled: 1
-    path: Assets/6.Scenes/Iris.unity
-    guid: 6ca35e23a98020548a0f6d55873662b1
-  - enabled: 1
-    path: Assets/6.Scenes/Mycelia.unity
-    guid: ba2adff37f7523044b06c01661942b46
+    path: Assets/6.Scenes/EndScene.unity
+    guid: 7669a155217001d43924d62a2d3756f4
   m_configObjects: {}
